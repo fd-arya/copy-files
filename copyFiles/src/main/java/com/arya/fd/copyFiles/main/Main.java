@@ -39,7 +39,7 @@ public class Main extends Application{
 //
 //		File fileSource = new File(directory.getSource());
 //		File fileDestination = new File(directory.getDest() + fileSource.getName());
-
+//
 //		try {
 			/*----------copy file-----------*/
 			// copyFile.copyFileStream(fileSource, fileDestination);
@@ -49,17 +49,17 @@ public class Main extends Application{
 			// deleteFiles.deleteing(fileSource); //fix it!!!
 
 			/*----------delete file-----------*/
-			// deleteFiles.deleteing(fileSource);
+//			 deleteFiles.deleteing(fileSource);
 
 			/*----------rename file-----------*/
 			// renameFiles.rename(fileSource);
 
 			/*----------encryption file-----------*/
-			// encryptFile.encrypt(fileSource);
+//			 encryptFile.encrypt(fileSource);
 
 			/*----------dencryption file-----------*/
 //			decryptFile.dencrypt(fileSource); // not working...
-
+//
 //		} catch (IOException e) {
 //			log(e);
 //		}
