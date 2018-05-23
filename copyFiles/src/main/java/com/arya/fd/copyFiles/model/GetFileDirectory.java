@@ -9,6 +9,7 @@ public class GetFileDirectory {
 
 	private String source; // file directory input
 	private String dest; // file directory output
+	private String log;
 
 	public String getSource() {
 		return source;
@@ -26,4 +27,11 @@ public class GetFileDirectory {
 		this.dest = dest;
 	}
 
+	public String getLog() {
+		return log;
+	}
+
+	public void setLog(String log) {
+		this.log = log;
+	}
 }
