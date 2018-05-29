@@ -29,6 +29,7 @@ public class Main extends Application{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/arya/fd/copyFiles/view/pages/MainFrom.fxml"));
 		Scene scene = new Scene(fxmlLoader.<BorderPane>load());
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("file manger");
 		primaryStage.show();
 	}
 }

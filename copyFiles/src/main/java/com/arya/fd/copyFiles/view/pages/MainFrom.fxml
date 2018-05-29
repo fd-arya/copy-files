@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -29,7 +30,7 @@
          <children>
             <VBox prefHeight="343.0" prefWidth="186.0">
                <children>
-                  <TextField fx:id="input" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="354.0">
+                  <TextField fx:id="input" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="354.0" promptText="Selection Input File...">
                      <padding>
                         <Insets bottom="11.0" top="4.0" />
                      </padding>
@@ -37,7 +38,7 @@
                         <Insets left="6.0" top="7.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="output" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="351.0">
+                  <TextField fx:id="output" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="351.0" promptText="Selection Output File...">
                      <padding>
                         <Insets bottom="11.0" top="4.0" />
                      </padding>
@@ -81,12 +82,13 @@
       <GridPane prefHeight="178.0" prefWidth="533.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="243.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="128.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="136.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="201.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="80.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -96,7 +98,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Encryption" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onMouseClicked="#bunEncryption" text="Encryption" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="12.0" />
                </GridPane.margin>
@@ -107,18 +109,47 @@
                   <Insets right="15.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Dencryption" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onMouseClicked="#bunDencryption" text="Dencryption" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="12.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#bunRename" text="Rename" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#bunQuit" text="Quit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextField fx:id="newName">
+            <Button mnemonicParsing="false" onMouseClicked="#bunRename" text="Rename" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="100.0" />
+               </GridPane.margin></Button>
+            <Button mnemonicParsing="false" onAction="#bunQuit" text="Quit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="newName" promptText="Write New Name...">
                <GridPane.margin>
                   <Insets bottom="2.0" left="16.0" right="29.0" />
                </GridPane.margin>
             </TextField>
+            <Label text="Password" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="160.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Key" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="200.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Password only 16 chatacters" textFill="#d30505" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label layoutX="265.0" layoutY="93.0" text="Key only 16 chatacters" textFill="#d30505" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="34.0" />
+               </GridPane.margin>
+            </Label>
+            <PasswordField fx:id="psfPassword" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="86.0" />
+               </GridPane.margin>
+            </PasswordField>
+            <PasswordField fx:id="psfKey" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="86.0" />
+               </GridPane.margin>
+            </PasswordField>
          </children>
          <BorderPane.margin>
             <Insets bottom="36.0" />
