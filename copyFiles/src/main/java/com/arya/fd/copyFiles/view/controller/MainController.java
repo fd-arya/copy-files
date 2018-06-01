@@ -89,31 +89,35 @@ public class MainController {
 		String selectedFileName = " ";
 
 		for (File file : getSelectedFiles()) {
-			selectedFileName = selectedFileName.concat(" { " + file.getName() + " } ");
+			selectedFileName = selectedFileName.concat("{" + file.getName() + "}");
 			input.setText(selectedFileName);
 		}
 	}
 
 	@FXML
 	public void bunOutputBrowas() {
-		
+
 		DirectoryChooser chooser = new DirectoryChooser();
 		chooser.setTitle("JavaFX Projects");
 		setSelectedFile(chooser.showDialog(null));
-		output.setText(" { " + getSelectedFile().getPath() + " } ");
+		output.setText(getSelectedFile().getPath());
 	}
 
 	@FXML
 	public void bunRename() {
 		if (input.getText().isEmpty()) {
-			log.setText("Directory File is Empty !");
+			log.setText("File is Empty !");
 		} else if (newName.getText().isEmpty()) {
 			log.setText("plz enter new name .");
 		} else {
 			try {
-				directory.setSource(input.getText());
-				File fileSource = new File(directory.getSource());
-				log.setText(renameFiles.rename(fileSource, newName.getText()));
+				if (getSelectedFiles().size() == 1) {
+				for (File file : getSelectedFiles()) {
+				log.setText(renameFiles.rename(file, newName.getText()));
+				}
+				}else {
+					log.setText("plz selected 1 only file .");
+				}
 			} catch (IOException e) {
 				log.setText(e.toString());
 			}
@@ -123,17 +127,15 @@ public class MainController {
 	@FXML
 	public void bunCopy() {
 
-		if (input.getText().isEmpty() || output.getText().isEmpty()) {
-			log.setText("Directory File is Empty !");
-		} else {
+		if (checkDirctoryFiles()) {
 			try {
-				directory.setSource(input.getText());
-				directory.setDest(output.getText());
-				File fileSource = new File(directory.getSource());
-				File fileDestination = new File(directory.getDest());
-
-				copyFile.copyFileStream(fileSource, fileDestination);
-				log.setText("file copy .");
+				String copy = "";
+				for (File file : getSelectedFiles()) {
+					File dirctory = new File(output.getText() + "/" + file.getName());
+					copy = copy + copyFile.copyFileStream(file, dirctory); 
+				}
+				
+				log.setText(copy + "\n");
 			} catch (IOException e) {
 				log.setText(e.toString());
 			}
@@ -143,33 +145,31 @@ public class MainController {
 	@FXML
 	public void bunMove() {
 
-		if (input.getText().isEmpty() || output.getText().isEmpty()) {
-			log.setText("Directory File is Empty !");
-		} else {
+		if (checkDirctoryFiles()) {
 			try {
-				directory.setSource(input.getText());
-				directory.setDest(output.getText());
-				File fileSource = new File(directory.getSource());
-				File fileDestination = new File(directory.getDest() + fileSource.getName());
-				log.setText(movingFile.moveFileStream(fileSource, fileDestination));
+				String mov = "";
+				for (File file : getSelectedFiles()) {
+					File dirctory = new File(output.getText() + "/" + file.getName());
+					mov = mov + movingFile.moveFileStream(file, dirctory) + "\n";
+				}
+				log.setText(mov);
 			} catch (IOException e) {
 				log.setText(e.toString());
 			}
 		}
-
 	}
 
 	@FXML
 	public void bunDelete() {
-		if (input.getText().isEmpty()) {
+		if (getSelectedFiles() == null || (getSelectedFiles() != null && getSelectedFiles().size() == 0)) {
 			log.setText("Directory File is Empty !");
 		} else {
 			try {
-				directory.setSource(input.getText());
-				File fileSource = new File(directory.getSource());
-
-				deleteFiles.deleteing(fileSource);
-				log.setText("delete file .");
+				String deleteing = "";
+				for (File file : getSelectedFiles()) {
+					deleteing = deleteing + deleteFiles.deleteing(file) + "\n";
+				}
+				log.setText(deleteing);
 			} catch (IOException e) {
 				log.setText(e.toString());
 			}
@@ -209,7 +209,58 @@ public class MainController {
 
 	@FXML
 	public void bunDencryption() {
+		if (checkValidation()) {
 
+			try {
+				log.setText("Start Dencrypting Files.....");
+				dencryptedFile();
+				log.setText("Successfully Dencrypting Files.");
+			} catch (Exception e) {
+
+				log.setText("Sorry,can't Dencrypting. Password or SecretKey wrong.");
+			}
+		}
+	}
+
+	private void dencryptedFile() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException,
+			InvalidKeyException, NoSuchPaddingException, IOException {
+
+		getService().setPassword(this.psfPassword.getText());
+		getService().setKey(this.psfKey.getText());
+
+		Map<File, File> dencryptedFiles = new HashMap<>();
+		for (File file : getSelectedFiles()) {
+
+			final String DENCRYPTED_FILE_NAME = file.getParent() + "/DE_" + file.getName().replace(".nit" , "");
+			dencryptedFiles.put(file, new File(DENCRYPTED_FILE_NAME));
+		}
+		getService().decrypted(dencryptedFiles);
+
+	}
+
+	private String dirctoryFiles() {
+		String tempDirctoryFiles = "";
+
+		if (getSelectedFiles() == null || (getSelectedFiles() != null && getSelectedFiles().size() == 0)) {
+			tempDirctoryFiles = tempDirctoryFiles + "Please Selected Files. \n";
+		}
+		if (output.getText().isEmpty()) {
+			tempDirctoryFiles = tempDirctoryFiles + "Dirctory file is null";
+		}
+		return tempDirctoryFiles;
+	}
+
+	private boolean checkDirctoryFiles() {
+		log.setText("");
+
+		final String DIRCTORYFILES_TEMP = dirctoryFiles();
+
+		if (DIRCTORYFILES_TEMP.isEmpty()) {
+			return true;
+		}
+
+		log.setText(DIRCTORYFILES_TEMP);
+		return false;
 	}
 
 	private String validation() {
@@ -226,10 +277,10 @@ public class MainController {
 			tempValidation = tempValidation + "secretKey length is wrong. Enter 16 Character only.\n";
 		}
 
-		// if (directory.getSource() == null || (directory.getDest()) == null ) {
-		//
-		// tempValidation = tempValidation + "Please Selected Files ";
-		// }
+		if (getSelectedFiles() == null || (getSelectedFiles() != null && getSelectedFiles().size() == 0)) {
+
+			tempValidation = tempValidation + "Please Selected Files ";
+		}
 
 		return tempValidation;
 	}

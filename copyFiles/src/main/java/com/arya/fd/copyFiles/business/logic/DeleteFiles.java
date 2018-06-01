@@ -9,12 +9,12 @@ import java.io.IOException;
  */
 
 public class DeleteFiles {
-	public void deleteing(File source) throws IOException{
+	public String deleteing(File source) throws IOException{
 
-		if (source.delete()) {
-			System.out.println(source.getName() + " is deleted!");
+		if ((source).delete()) {
+			return ((source).getName() + " is deleted!");
 		} else {
-			System.out.println("Delete operation is failed.");
+			return ((source).getName() + "Delete operation is failed.");
 		}
 	}
 }
