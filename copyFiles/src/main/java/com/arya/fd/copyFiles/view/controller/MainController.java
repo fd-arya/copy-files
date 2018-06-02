@@ -13,7 +13,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import com.arya.fd.copyFiles.business.logic.CopyingFiles;
 import com.arya.fd.copyFiles.business.logic.DeleteFiles;
-import com.arya.fd.copyFiles.business.logic.MovingFilesNew;
+import com.arya.fd.copyFiles.business.logic.MovingFiles;
 import com.arya.fd.copyFiles.business.logic.RenameFiles;
 import com.arya.fd.copyFiles.business.service.internal.security.EncryptDecryptService;
 import com.arya.fd.copyFiles.model.GetFileDirectory;
@@ -27,7 +27,7 @@ import javafx.stage.FileChooser;
 
 public class MainController {
 	CopyingFiles copyFile = new CopyingFiles();
-	MovingFilesNew movingFile = new MovingFilesNew();
+	MovingFiles movingFile = new MovingFiles();
 	DeleteFiles deleteFiles = new DeleteFiles();
 	RenameFiles renameFiles = new RenameFiles();
 	GetFileDirectory directory = new GetFileDirectory();

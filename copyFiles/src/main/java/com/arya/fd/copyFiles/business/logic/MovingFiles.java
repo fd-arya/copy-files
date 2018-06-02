@@ -8,11 +8,11 @@ import java.io.IOException;
  */
 
 public class MovingFiles {
-	public static void MoveFileStream(File source, File dast) throws IOException{
-		CopyingFiles copyingFiles = new CopyingFiles();
-		DeleteFiles deleteFiles = new DeleteFiles();
-		
-		copyingFiles.copyFileStream(source, dast);
-		deleteFiles.deleteing(source);
+	public String moveFileStream(File source, File dast) throws IOException {
+		if (source.renameTo(dast)) {
+			return (source.getName() + " moved successfully");
+		} else {
+			return (source.getName() + " not moved.");
+		}
 	}
 }

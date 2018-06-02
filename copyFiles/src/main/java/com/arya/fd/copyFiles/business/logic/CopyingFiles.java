@@ -13,9 +13,12 @@ import java.io.OutputStream;
  */
 
 public class CopyingFiles {
+	private InputStream inputStream;
+	private OutputStream outputStream;
+
 	public String copyFileStream(File source, File dast) throws IOException {
-		InputStream inputStream = new FileInputStream(source);
-		OutputStream outputStream = new FileOutputStream(dast);
+		inputStream = new FileInputStream(source);
+		outputStream = new FileOutputStream(dast);
 
 		byte[] buffer = new byte[1024];
 
@@ -23,6 +26,6 @@ public class CopyingFiles {
 		while ((length = inputStream.read(buffer)) > 0) {
 			outputStream.write(buffer, 0, length);
 		}
-		return source.getName()  + "Copy successfully";
+		return source.getName()  + " Copy successfully";
 	}
 }

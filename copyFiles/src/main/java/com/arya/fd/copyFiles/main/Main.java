@@ -13,13 +13,6 @@ public class Main extends Application{
 	 */
 
 	public static void main(String[] args)  {
-		
-//		EncryptFile encryptFile = new EncryptFile();
-//		DecryptFile decryptFile = new DecryptFile();
-			/*----------encryption file-----------*/
-//			 encryptFile.encrypt(fileSource);
-			/*----------dencryption file-----------*/
-//			decryptFile.dencrypt(fileSource); // not working...
 	
 	launch(args);
 	}
